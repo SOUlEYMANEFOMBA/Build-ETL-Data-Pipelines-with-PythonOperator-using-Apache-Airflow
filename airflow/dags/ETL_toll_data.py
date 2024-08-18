@@ -9,8 +9,26 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-def simple_function():
-    print("DAG execution started")
+def download_dataset():
+    pass
+
+def untar_dataset():
+    pass
+
+def extract_data_from_csv():
+    pass
+
+def extract_data_from_tsv():
+    pass
+
+def extract_data_from_fixed_width():
+    pass
+
+def consolidate_data():
+    pass
+
+def transform_data():
+    pass
 
 dag = DAG(
     dag_id="ETL_toll_DATA",
@@ -21,7 +39,7 @@ dag = DAG(
 
 start = PythonOperator(
     task_id='start',
-    python_callable=simple_function,
+    python_callable=transform_data,
     dag=dag,
 )
 

@@ -69,5 +69,11 @@ services:
       - ./airflow/dags:/opt/airflow/dags
     entrypoint: ["airflow", "db", "init"]
 
+  python :
+    build:
+      context: .
+      dockerfile: ./python-image/Dockerfile
+    container_name: python_container
+
 volumes:
   pgdata:
