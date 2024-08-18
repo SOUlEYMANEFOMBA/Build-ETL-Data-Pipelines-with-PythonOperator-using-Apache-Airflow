@@ -1,16 +1,21 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
-
-default_args = {
-    'owner': 'airflow',
-    'start_date': datetime(2024, 8, 18),
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
-}
+import requests
+import tarfile
 
 def download_dataset():
-    pass
+    url =" https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Final%20Assignment/tolldata.tgz"
+    
+    ##Chemin de destination pour le fichier tar télecharger
+    destination_tar="C:\Users\soule\Desktop\ETL\Build-ETL-Data-Pipelines-with-PythonOperator-using-Apache-Airflow\airflow\data"
+    
+    #Télechargement du fichier tar 
+    response=requests.get(url)
+    
+    with open(destination_tar,"wb") as file:
+        file.write(response.content)
+    
 
 def untar_dataset():
     pass
@@ -30,12 +35,21 @@ def consolidate_data():
 def transform_data():
     pass
 
+
+default_args = {
+    'owner': 'airflow',
+    'start_date': datetime(2024, 8, 18),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
 dag = DAG(
     dag_id="ETL_toll_DATA",
     default_args=default_args,
     schedule_interval='@daily',
     description='Apache Airflow',
 )
+
 
 start = PythonOperator(
     task_id='start',
