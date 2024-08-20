@@ -28,7 +28,7 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
     volumes:
       - ../:/workspace
-      - ./airflow/dags:/opt/airflow/dags
+      - ../airflow/dags:/opt/airflow/dags
     ports:
       - "8080:8080"
     command: >
@@ -50,7 +50,7 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
     volumes:
       - ../:/workspace
-      - ./airflow/dags:/opt/airflow/dags
+      - ../airflow/dags:/opt/airflow/dags
     command: >
       bash -c "
       airflow db init &&
@@ -69,7 +69,7 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
     volumes:
       - ../:/workspace
-      - ./airflow/dags:/opt/airflow/dags
+      - ../airflow/dags:/opt/airflow/dags
     entrypoint: ["airflow", "db", "init"]
 
   python :
