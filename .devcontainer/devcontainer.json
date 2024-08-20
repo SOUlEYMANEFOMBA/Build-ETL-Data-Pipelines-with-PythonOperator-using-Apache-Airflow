@@ -2,7 +2,7 @@
     "name": "Build ETL Data Pipelines with PythonOperator using Apache Airflow",
     "dockerComposeFile": "docker-compose.yml",
     "service": "python",
-    "runServices": ["webserver","postgres","scheduler","initdb"],
+    "runServices": ["webserver","postgres","scheduler"],
     "workspaceFolder": "/workspace",
 
     "postCreateCommand": "pip3 install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --user -r requirements.txt",
