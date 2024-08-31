@@ -21,6 +21,7 @@ services:
     container_name: airflow_webserver
     depends_on:
       - postgres
+      - initdb
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
@@ -43,6 +44,7 @@ services:
     container_name: airflow_scheduler
     depends_on:
       - postgres
+      - initdb
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
@@ -60,6 +62,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: airflow_initdb
     depends_on:
       - postgres
     environment:
