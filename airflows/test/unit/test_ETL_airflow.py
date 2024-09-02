@@ -4,7 +4,7 @@ from airflow.utils.db import initdb
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from airflow import settings
-from  airflows.tasks.Download_task import DownloadTask
+from  airflows.dags.tasks.Download_task import DownloadTask
 from unittest.mock import patch, mock_open, MagicMock
 
 class TestExampleDag(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestExampleDag(unittest.TestCase):
         settings.engine = cls.engine
         initdb()
 
-        cls.dagbag = DagBag(dag_folder="/workspace/airflow/dags", include_examples=False)
+        cls.dagbag = DagBag(dag_folder="/workspace/airflows/dags", include_examples=False)
         print(f"DAGs chargés : {list(cls.dagbag.dags.keys())}")
         print(f"Erreurs de chargement des DAGs : {cls.dagbag.import_errors}")
 
@@ -28,9 +28,9 @@ class TestExampleDag(unittest.TestCase):
         self.downloadTask=DownloadTask(self.url)
         
         # Chemin de destination pour le fichier tar téléchargé
-        self.destination_tar ="/workspace/airflow/data_tar"
+        self.destination_tar ="/workspace/airflows/data_tar"
         # Chemin pour extraire le fichier tar
-        self.extractfolder="/workspace/airflow/extract_folder"
+        self.extractfolder="/workspace/airflows/extract_folder"
     def test_etl_toll_data_dags_exist(self):
         dag = self.dagbag.get_dag(dag_id="ETL_toll_DATA")
         self.assertIsNotNone(dag)

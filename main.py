@@ -1,6 +1,6 @@
 # pip install cryptography
 from cryptography.fernet import Fernet
-from airflows.tasks.Download_task import DownloadTask
+from airflows.dags.tasks.Download_task import DownloadTask
 def main():
     # # Génère une clé Fernet
     # key = Fernet.generate_key()
@@ -9,10 +9,10 @@ def main():
     downloadTask=DownloadTask(url)
         
     # Chemin de destination pour le fichier tar téléchargé
-    destination_tar ="/workspace/airflow/data_tar"
+    destination_tar ="/workspace/airflows/data_tar"
     # Chemin pour extraire le fichier tar
-    destination ="/workspace/airflow/data_tar/tolldata.tgz"
-    extractfolder="/workspace/airflow/extract_folder"
+    destination ="/workspace/airflows/data_tar/tolldata.tgz"
+    extractfolder="/workspace/airflows/extract_folder"
     downloadTask.download_dataset(destination_tar)
     downloadTask.untar_dataset(destination, extractfolder)
 

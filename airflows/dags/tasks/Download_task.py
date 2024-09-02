@@ -1,12 +1,14 @@
 import tarfile as tar 
 import requests
 import os 
+import logging
 class DownloadTask():
     '''cette classe permet de télécharger les données et les dezipper'''
     def __init__(self, url):
         self.url = url
     
     def download_dataset(self, destination_tar):
+        logging.info(f"Downloading file from {self.url} to {destination_path}")
          # Assurez-vous que le répertoire de destination existe
         if not os.path.exists(destination_tar):
             os.makedirs(destination_tar)
@@ -22,12 +24,14 @@ class DownloadTask():
         # Enregistrement du fichier
         with open(destination_path, "wb") as file:
             file.write(response.content)
-
+        logging.info("Download completed")
     def untar_dataset(self,destination_tar,extract_folder):
+        logging.info(f"Extracting {destination_tar} to {extract_folder}")
         if not os.path.exists(extract_folder):
             os.makedirs(extract_folder)
         # Extraction du dataset
         
         with tar.open(destination_tar, "r:gz") as tar_file:
             tar_file.extractall(path=extract_folder)
+        logging.info("untaring completed")
 
