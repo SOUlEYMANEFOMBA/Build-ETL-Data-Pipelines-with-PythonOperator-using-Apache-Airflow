@@ -8,7 +8,7 @@ class DownloadTask():
         self.url = url
     
     def download_dataset(self, destination_tar):
-        logging.info(f"Downloading file from {self.url} to {destination_path}")
+        logging.info(f"Downloading file from {self.url} to {destination_tar}")
          # Assurez-vous que le répertoire de destination existe
         if not os.path.exists(destination_tar):
             os.makedirs(destination_tar)
