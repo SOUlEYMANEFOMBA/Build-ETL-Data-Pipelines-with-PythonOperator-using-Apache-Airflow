@@ -1,0 +1,7 @@
+GitPython==3.1.41
+└── gitdb [required: >=4.0.1,<5, installed: 4.0.11]
+    └── smmap [required: >=3.0.1,<6, installed: 5.0.1]
+pipdeptree==2.23.1
+├── packaging [required: >=23.1, installed: 24.1]
+└── pip [required: >=23.1.2, installed: 24.2]
+wheel==0.44.0
