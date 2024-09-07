@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from tasks.Download_task import  DownloadTask
 from tasks.Extract_task import ExtractTask
 from tasks.Transform_task import TransformTask
+from tasks.Load_task import LoadTask
 
 
 default_args = {
@@ -79,4 +80,12 @@ transfom_task=PythonOperator(
     op_args=["/workspace/airflows/extract_folder/extracted_data.csv",extract_folder],
     dag=dag,
 )
-download_task >> untar_task >>[extract_csv_task,extract_tsv_task,extract_fixed_dataset_task]>> consolidate_task >> transfom_task
+
+load_task=LoadTask()
+loading_task=PythonOperator(
+    task_id="londing_into_postgres_data_table",
+    python_callable=load_task.load_in_postgres_tab,
+    op_args=["/workspace/airflows/extract_folder/transformed_data.csv"],
+    dag=dag,
+)
+download_task >> untar_task >>[extract_csv_task,extract_tsv_task,extract_fixed_dataset_task]>> consolidate_task >> transfom_task >> loading_task
