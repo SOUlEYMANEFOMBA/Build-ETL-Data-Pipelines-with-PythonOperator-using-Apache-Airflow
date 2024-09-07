@@ -4,6 +4,7 @@ import csv
 class LoadTask():
     
     def load_in_postgres_tab(self,file):
+        print("Loading started")
         conn=psycopg2.connect("host=postgres,port=5432,dbname=airflow,user=airflow,password=airflow")
         ##On va créer une object cursor qui nous permettra de requeter notre base de donnée
         cur=conn.cursor()
@@ -49,6 +50,7 @@ class LoadTask():
         
         print(f"Voici la première ligne de notre base de données: {one}")
         print(f"Liste de chaque ligne du tableau: {all}")
+        print("Data load in postgres final_database")
        # Fermeture du curseur et de la connexion
         cur.close()
         conn.close()
