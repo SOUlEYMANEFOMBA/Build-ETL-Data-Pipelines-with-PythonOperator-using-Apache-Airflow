@@ -14,3 +14,5 @@ In this assignment, you will develop an Apache Airflow DAG that will:
 - Transform the data
 
 - Load the transformed data into the staging area
+## Dags
+![Alt text](./Graph_dag.png)

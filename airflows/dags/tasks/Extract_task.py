@@ -2,11 +2,12 @@ import os
 import pandas as pd 
 import csv
 import sys
-
+import logging
 class ExtractTask():
     
     def extract_data_from_csv(self,csv_file,extract_folder):
                 print("begining of csv extrac file")
+                logging.info(f"Begining of csv extrac file")
                 if not os.path.exists(extract_folder):
                     print("Folder doesn't exist, untardata probably fail")
                     sys.exit(1)
@@ -26,12 +27,14 @@ class ExtractTask():
                             row=line.split(',')
                             writer.writerow([row[0],row[1],row[2],row[3]])
                     print(f"Vehicle-data.csv extracted and saved to {output_file}")
+                    logging.info(f"Vehicle-data.csv extracted and saved to {output_file}")
                 except Exception as e:
                     print(f"An error occured: {e}")
                 print("*"*30)
 
     def extract_data_from_tsv(self,tsv_file, extract_folder):
             print("begining of tsv extrac file")
+            logging.info(f"Begining of tsv extrac file")
             if not os.path.exists(extract_folder):
                 print("Folder doesn't exist, untardata probably fail")
                 sys.exit(1)
@@ -44,12 +47,14 @@ class ExtractTask():
                         row=line.split('\t')
                         writer.writerow([row[0],row[1],row[2]])
                 print(f"Tollplaza-data.tsv extracted and saved to {output_file}")
+                logging.info(f"Tollplaza-data.tsv extracted and saved to {output_file}")
             except Exception as e:
                 print(f"An error occured:{e}")
             print("*"*30)
 
     def extract_data_from_fixed_width(self,payement_data_txt, extract_folder):
                 print("begining of fised_data extrac file")
+                logging.info(f"Begining of fixed_data extrac file")
                 if not os.path.exists(extract_folder):
                     print("Folder doesn't exist, untardata probably fail")
                     sys.exit(1)
@@ -61,12 +66,14 @@ class ExtractTask():
                             for line in infile:
                                 writer.writerow([line[0:6].strip(), line[6:12].strip()])
                     print(f"extract_data_from_fixed_width extracted and saved to {output_file}")
+                    logging.info(f"extract_data_from_fixed_width extracted and saved to {output_file}")
                 except Exception as e :
                     print(f"An error occured: {e}")
                 print("*"*30)
                 
     def consolidate_data(self,csv_data_file,tsv_data_file,fixed_width_data_file,extract_folder):
                 print("begining of consolidate data")
+                logging.info(f"Begining of consolidate data")
                 if not os.path.exists(extract_folder):
                     print("folder doesn't exist, untardata probably fail")
                     sys.exit(1)
@@ -85,6 +92,7 @@ class ExtractTask():
                         for csv_row,tsv_row,fixed_row in zip(csv_reader,tsv_reader,fixed_reader):
                             writer.writerow(csv_row+tsv_row+fixed_row)
                     print(f"Data consolidated and saved to {output_file}")
+                    logging.info(f"Data consolidated and saved to {output_file}")
                 except Exception as e:
                     print(f"An error occured : {e}")
                     sys.exit(1) 

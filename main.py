@@ -4,10 +4,14 @@ from airflows.dags.tasks.Download_task import DownloadTask
 from airflows.dags.tasks.Extract_task import ExtractTask
 from airflows.dags.tasks.Transform_task import TransformTask
 from airflows.dags.tasks.Load_task import LoadTask
+import secrets
 def main():
     # # Génère une clé Fernet
     # key = Fernet.generate_key()
     # print(key.decode())  # Imprime la clé générée
+    
+    print(secrets.token_urlsafe(32))
+
     url="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Final%20Assignment/tolldata.tgz"
     downloadTask=DownloadTask(url)
     extractTask=ExtractTask()

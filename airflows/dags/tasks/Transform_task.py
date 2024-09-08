@@ -1,11 +1,13 @@
 import sys
 import os
 import csv
+import logging
 
 class TransformTask():
      
     def transform_data(self,input_file,destination_path):
             print("begining of transform data")
+            logging.info(f"begining of transform data")
             if not os.path.exists(destination_path):
                 print("folder doesn't exist, untardata probably fail")
                 sys.exit(1)
@@ -21,6 +23,7 @@ class TransformTask():
                         writer.writerow(row)
                         
                 print(f"Data transfomed and saved to {output_file}")
+                logging.info(f"Data transfomed and saved to {output_file}")
             except Exception as e:
                 print(f'An error occured: {e}')
                 sys.exit(1)

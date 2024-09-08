@@ -27,9 +27,16 @@ services:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
       AIRFLOW__CORE__FERNET_KEY: 'IXmfLfBkdFZQrcRh8IRtcwnVmYDfj4luOhW-3JvCIlg='
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
+      AIRFLOW_WEBSERVER_SECRET_KEY: 'nbfU9eBq4T9AyRxZ0HMW2J7j3Ectcp5ig5udeCYjvA4'
     volumes:
       - ../:/workspace
       - ../airflows/dags:/opt/airflow/dags
+      - ../airflows/data_tar:/opt/airflows/data_tar
+      - ../airflows/extract_folder:/opt/airflows/extract_folder
+      - ../airflow-data/includes:/opt/airflow/includes
+      - ../airflow-data/logs:/opt/airflow/logs
+      - ../airflow-data/plugins:/opt/airflow/plugins
+      - ../airflow-data/airflow.cfg:/opt/airflow/airflow.cfg
     ports:
       - "8080:8080"
     command: >
@@ -53,6 +60,9 @@ services:
     volumes:
       - ../:/workspace
       - ../airflows/dags:/opt/airflow/dags
+      - ../airflows/data_tar:/opt/airflows/data_tar
+      - ../airflows/extract_folder:/opt/airflows/extract_folder
+      - ../airflow-data/airflow.cfg:/opt/airflow/airflow.cfg 
     command: >
       bash -c "
       airflow db init &&
@@ -73,6 +83,9 @@ services:
     volumes:
       - ../:/workspace
       - ../airflows/dags:/opt/airflow/dags
+      - ../airflows/data_tar:/opt/airflow/data_tar
+      - ../airflows/extract_folder:/opt/airflow/extract_folder
+      - ../airflow-data/airflow.cfg:/opt/airflow/airflow.cfg 
     entrypoint: ["airflow", "db", "init"]
 
   python :
