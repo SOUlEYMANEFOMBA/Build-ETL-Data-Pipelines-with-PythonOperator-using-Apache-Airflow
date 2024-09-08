@@ -28,6 +28,7 @@ class ExtractTask():
                     print(f"Vehicle-data.csv extracted and saved to {output_file}")
                 except Exception as e:
                     print(f"An error occured: {e}")
+                print("*"*30)
 
     def extract_data_from_tsv(self,tsv_file, extract_folder):
             print("begining of tsv extrac file")
@@ -45,7 +46,7 @@ class ExtractTask():
                 print(f"Tollplaza-data.tsv extracted and saved to {output_file}")
             except Exception as e:
                 print(f"An error occured:{e}")
-        
+            print("*"*30)
 
     def extract_data_from_fixed_width(self,payement_data_txt, extract_folder):
                 print("begining of fised_data extrac file")
@@ -54,7 +55,7 @@ class ExtractTask():
                     sys.exit(1)
                 output_file=f"{extract_folder}/fixed_width_data.csv"
                 try :
-                    with open(payement_data_txt,'w') as infile, open(output_file,'w') as outfile:
+                    with open(payement_data_txt,'r') as infile, open(output_file,'w') as outfile:
                             writer=csv.writer(outfile)
                             writer.writerow(["Type of Payment code", "Vehicle Code"])
                             for line in infile:
@@ -62,6 +63,7 @@ class ExtractTask():
                     print(f"extract_data_from_fixed_width extracted and saved to {output_file}")
                 except Exception as e :
                     print(f"An error occured: {e}")
+                print("*"*30)
                 
     def consolidate_data(self,csv_data_file,tsv_data_file,fixed_width_data_file,extract_folder):
                 print("begining of consolidate data")
@@ -81,8 +83,10 @@ class ExtractTask():
                         next(tsv_reader)
                         next(fixed_reader)
                         for csv_row,tsv_row,fixed_row in zip(csv_reader,tsv_reader,fixed_reader):
-                            writer.writerow(csv_row,tsv_row,fixed_row)
+                            writer.writerow(csv_row+tsv_row+fixed_row)
                     print(f"Data consolidated and saved to {output_file}")
                 except Exception as e:
-                    print(f"An error occured : {e}")               
+                    print(f"An error occured : {e}")
+                    sys.exit(1) 
+                print("*"*30)            
                 
